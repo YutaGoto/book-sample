@@ -74,3 +74,6 @@ typings/
 
 dist/
 output.pdf
+
+# macOS
+.DS_store

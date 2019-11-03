@@ -16,6 +16,15 @@ module.exports = function (grunt) {
                 ],
                 options: {
                     template: 'templates/section.jst',
+                    markdownOptions: {
+                        gfm: true
+                    },
+                    postCompile: function (src, context) {
+                        return src
+                            .replace(/<p><img src=/g, "<p class=\"imageHolder\"><img src=")
+                            .replace(/<table>/g, "<div class=\"tableHolder\"><table>")
+                            .replace(/<\/table>/g, "</table></div>");
+                    }
                 }
             }
         },
@@ -39,8 +48,8 @@ module.exports = function (grunt) {
         copy: {
             main: {
                 files: [
-                    { expand: true, cwd: 'articles/images/', src: ['**'], dest: 'dist/images/'},
-                    { expand: true, cwd: 'templates/assets/',src: ['**'], dest: 'dist/assets/' }
+                    { expand: true, cwd: 'articles/images/', src: ['**'], dest: 'dist/images/' },
+                    { expand: true, cwd: 'templates/assets/', src: ['**'], dest: 'dist/assets/' }
                 ],
             },
         }
